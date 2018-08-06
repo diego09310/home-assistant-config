@@ -1,0 +1,137 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: !secret name
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret time_zone
+  # Customization file
+  customize: !include customize.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+  trusted_networks: 192.168.1.0/24
+  trusted_proxies: 192.168.1.30
+  use_x_forwarded_for: True
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: 192.168.1.30:8123
+
+# Enables mqtt embedded broker
+mqtt:
+  discovery: true
+  discovery_prefix: homeassistant
+
+light:
+  - platform: mqtt
+    name: lightdiego
+    state_topic: lightdiego/relay/0
+    command_topic: lightdiego/relay/0/set
+    payload_on: 1
+    payload_off: 0
+    availability_topic: lightdiego/status
+    payload_available: 1
+    payload_not_available: 0
+
+media_player:
+  - platform: kodi
+    host: 192.168.1.124
+    port: 80
+
+wink:
+
+switch:
+  - platform: broadlink
+    host: 192.168.1.148
+    mac: !secret broadlink_mac
+    timeout: 15
+    switches:
+      tv_samsung:
+        friendly_name: "Madriguer"
+        command_on: 'JgBGAJKVETkRORA6ERQRFBEUERQRFBE5ETkQOhAVEBUQFREUEBUQOhEUERQRORE5EBURFBA6EBUQOhE5EBUQFRA6EDoRFBEADQUAAA=='
+        command_off: 'JgBGAJOVEDoQOhA6DxYPFhAVEBUQFRA6ETkROREUERQRFBEUEBUQFREUERQRORE5EBUQFRE5ETkRORE5ERUQFRA6DzsPFhAADQUAAA=='
+      tv_sm:
+        command_on: 'JgBGAJKVDzsQOhA6EBUQFRAVERQRFBE5EDoSOBEUERQRFBAVEBURFBE5ERQRFBAVERQRFBEUETkRFBE5ETkRORE5EToQOg8ADQUAAA=='
+        command_off: 'JgBGAJKVDzsQOhA6EBUQFRAVERQRFBE5EDoSOBEUERQRFBAVEBURFBE5ERQRFBAVERQRFBEUETkRFBE5ETkRORE5EToQOg8ADQUAAA=='
+      soundbar:
+        friendly_name: "Soundbar"
+        command_on: 'JgBQAJSTEBEPERAREBEQMhAxEBEQERAxEDEQMhAxEBEQERAREBAQlBAREBEQERARDxEQERARDxIPMRExEDIQEBAyEDIQMRAxEBEQEQ8REDIQAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAJSTEBEPERAREBEQMhAxEBEQERAxEDEQMhAxEBEQERAREBAQlBAREBEQERARDxEQERARDxIPMRExEDIQEBAyEDIQMRAxEBEQEQ8REDIQAA0FAAAAAAAAAAA='
+      tv_lg:
+        command_on: 'JgCwAAABJpUSExITDzoSEhEVEhMPFREUEzYSOBAVETgROQ86DzoSOBAVEBQRFBM2ERUPFREUERQPOhA6EDkPFRI4EDkSNxI4EQAFLAABJUwRAAxZAAEnSRIADFgAASRMEwAMWAABJkoRAAxZAAElSxIADFgAASdJEgAMWAABJ0kSAAxZAAEnSRAADFoAASdJEQAMWQABJksQAAxZAAEmSxIADFgAASRNEQAMWAABJ0oSAA0FAAAAAAAAAAA='
+        command_off: 'JgCwAAABJpUSExITDzoSEhEVEhMPFREUEzYSOBAVETgROQ86DzoSOBAVEBQRFBM2ERUPFREUERQPOhA6EDkPFRI4EDkSNxI4EQAFLAABJUwRAAxZAAEnSRIADFgAASRMEwAMWAABJkoRAAxZAAElSxIADFgAASdJEgAMWAABJ0kSAAxZAAEnSRAADFoAASdJEQAMWQABJksQAAxZAAEmSxIADFgAASRNEQAMWAABJ0oSAA0FAAAAAAAAAAA='
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: yr
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+  google_actions:
+    filter:
+      include_entities:
+        - light.ligthdiego
+        - groups.living_room
+    entity_config:
+      light.lightdiego:
+        name: Diego
+        aliases:
+         - my room
+        # room: diego
+      groups.living_room:
+        name: living room
+        aliases:
+         - Salon
+        # room: living room
+
+logger:
+  default: debug
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

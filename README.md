@@ -1,0 +1,3 @@
+# Home Assistant
+
+Configuration for Home Assistant...

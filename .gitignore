@@ -1,0 +1,80 @@
+### HomeAssistant ###
+# Files with personal details
+*.crt
+*.csr
+*.key
+.google.token
+.uuid
+icloud/
+google_calendars.yaml
+harmony_media_room.conf
+home-assistant.db
+home-assistant_v2.db
+home-assistant_v2.db-*
+html5_push_registrations.conf
+ip_bans.yaml
+known_devices.yaml
+phue.conf
+plex.conf
+pyozw.sqlite
+secrets.yaml
+tradfri.conf
+
+# Temporary files
+*.db-journal
+*.pid
+tts
+
+# automatically downloaded dependencies
+deps
+lib
+www
+
+# Log files
+home-assistant.log
+ozw_log.txt
+
+# Development files
+custom_components/
+
+# Personal data/third party data
+.wink.conf
+.cloud
+.storage
+entity_registry.yaml
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### Vim ###
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+
+# Temporary
+.netrwhist
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+
+# End of https://www.gitignore.io/api/vim,linux,homeassistant

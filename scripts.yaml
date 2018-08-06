@@ -1,0 +1,21 @@
+turn_off_living_room:
+  alias: Turn off the Living room
+  sequence:
+    - service: switch.broadlink_send_packet_192_168_1_148
+      data:
+        packet:
+          - 'JgBGAJOVEDoQOhA6DxYPFhAVEBUQFRA6ETkROREUERQRFBEUEBUQFREUERQRORE5EBUQFRE5ETkRORE5ERUQFRA6DzsPFhAADQUAAA=='
+    - service: switch.broadlink_send_packet_192_168_1_148
+      data:
+        packet:
+          - 'JgBQAJSTEBEPERAREBEQMhAxEBEQERAxEDEQMhAxEBEQERAREBAQlBAREBEQERARDxEQERARDxIPMRExEDIQEBAyEDIQMRAxEBEQEQ8REDIQAA0FAAAAAAAAAAA='
+    - service: switch.turn_off
+      entity_id: switch.culebra
+
+turn_off_lg:
+  alias: Turn off LG
+  sequence:
+    - service: switch.broadlink_send_packet_192_168_1_148
+      data:
+        packet:
+          - 'JgCwAAABJpUSExITDzoSEhEVEhMPFREUEzYSOBAVETgROQ86DzoSOBAVEBQRFBM2ERUPFREUERQPOhA6EDkPFRI4EDkSNxI4EQAFLAABJUwRAAxZAAEnSRIADFgAASRMEwAMWAABJkoRAAxZAAElSxIADFgAASdJEgAMWAABJ0kSAAxZAAEnSRAADFoAASdJEQAMWQABJksQAAxZAAEmSxIADFgAASRNEQAMWAABJ0oSAA0FAAAAAAAAAAA='

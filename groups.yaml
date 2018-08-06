@@ -1,0 +1,37 @@
+home:
+  name: Home
+  view: yes
+  icon: mdi:home
+  entities:
+    - media_player.madriguer
+
+living_room:
+  name: Salones
+  view: yes
+  icon: mdi:television
+  entities:
+    - group.video_living_room
+    - group.audio_living_room
+
+video_living_room:
+  name: Video
+  entities:
+    - media_player.madriguer
+    - media_player.hugo_
+    - media_player.kodi
+
+audio_living_room:
+  name: Audio
+  entities:
+    - media_player.janet
+    - media_player.equipo_de_musica
+    - media_player.salones 
+
+room_diego:
+  name: Diego
+  icon: mdi:hotel
+  view: yes
+  entities:
+    - light.lightdiego
+    - media_player.diegos_speaker
+
