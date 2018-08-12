@@ -10,6 +10,8 @@ homeassistant:
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret time_zone
+  # Include Packages
+  packages: !include_dir_named packages
   # Customization file
   customize: !include customize.yaml
 
@@ -33,6 +35,10 @@ http:
 
 # Enables mqtt embedded broker
 mqtt:
+  broker: 127.0.0.1
+  port: 1883
+  username: homeassistant
+  password: !secret http_password
   discovery: true
   discovery_prefix: homeassistant
 
@@ -130,7 +136,7 @@ cloud:
         # room: living room
 
 logger:
-  default: debug
+  default: error
 
 group: !include groups.yaml
 automation: !include automations.yaml

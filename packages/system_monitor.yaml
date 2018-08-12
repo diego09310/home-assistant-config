@@ -1,0 +1,33 @@
+homeassistant:
+  customize:
+    sensor.processor_use:
+      friendly_name: CPU Usage
+    sensor.memory_usage_percent:
+      friendly_name: Memory Usage
+    sensor.disk_use_percent:
+      friendly_name: Disk Usage
+    sensor.cpu_temperature:
+      friendly_name: CPU temperature
+
+group:
+  system_monitor:
+    name: "Raspberry"
+    control: hidden
+    entities:
+      - sensor.processor_use
+      - sensor.memory_use_percent
+      - sensor.disk_use_percent_
+      - sensor.cpu_temperature
+
+sensor:
+  - platform: systemmonitor
+    resources:
+      - type: processor_use
+      - type: memory_use_percent
+      - type: disk_use_percent
+        arg: /
+  - platform: command_line
+    name: CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ (value | multiply(0.001)) | round(1) }}'
