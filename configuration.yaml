@@ -116,6 +116,9 @@ sensor:
 tts:
   - platform: google
 
+recorder:
+  db_url: !secret db_url
+
 # Cloud
 cloud:
   google_actions:
